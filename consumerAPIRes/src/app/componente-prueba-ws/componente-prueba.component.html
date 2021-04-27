@@ -1,0 +1,37 @@
+<div class="row">
+  <div class="col">
+    <h1>Listado de personas en la BD </h1>
+    <h1>{{listaPersonas.length }} </h1>
+    <ul *ngIf="listaPersonas.length > 0" class="list-group">
+      <li *ngFor="let person of listaPersonas" class="list-group-item" (click)="inicializaPersona(person)"
+        (dblclick)="pintaImput()">
+        <span>
+          El nombre de la persona es : {{person.nombre}} y si id es: {{person.idPersona}}
+        </span>
+        <span style="color: red;" (click)="deletePersona(person)" *ngIf="!isEditable">
+          X
+        </span>
+      </li>
+    </ul>
+
+    <div class="input-group mt-2" *ngIf="isEditable">
+      <input type="text" class="form-control" name="idPersona" value="{{ personaFormulario.idPersona }}"
+        [(ngModel)]="personaFormulario.idPersona" onfocus="this.select()" autofocus>
+
+      <input type="text" class="form-control" name="nombrePersona" value="{{ personaFormulario.nombre }}"
+        [(ngModel)]="personaFormulario.nombre">
+
+
+      <button type="button" class="btn btn-outline-info" (click)="updatePersona(personaFormulario)"> Actualizar
+      </button>
+    </div>
+
+  </div>
+</div>
+
+<div class="row">
+  <div class="col">
+    <button type="button" class="btn btn-outline-primary" (click)="saveNewPersona()"> Agrega Persona</button>
+  </div>
+
+</div>
